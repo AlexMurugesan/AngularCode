@@ -1,0 +1,40 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<div class="container-fluid" style="height:360px">
+  <div class="row" style="margin-top: 40px">
+    <div class="col-sm-6">
+      <h3>Available Courses</h3>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+          <table class="table table-bordered table-striped mb-0" style="width: 50%;margin-left: 25%">
+              <tr>
+                <th class="table-info" *ngFor="let key of keys" style="background-color: black; color: white; text-transform: capitalize">{{key}}</th>
+              </tr>
+              <tr *ngFor="let l of list" style="overflow: scroll">
+                <td *ngFor="let key of keys">{{l[key]}}</td>
+              </tr>
+            </table>
+      </div>
+                 
+    </div>
+    <div class="col-sm-6">
+      <h3>Add Courses</h3>
+      <form [formGroup]="myForm">
+        <div formArrayName="Course">
+          <div *ngFor="let item of courseNames.controls; let pointIndex=index" [formGroupName]="pointIndex">
+            <label>
+              Course Name: <input class="form-control" style="width: 67%; margin-left: 100px" type="text" formControlName="course_name" required>
+            </label>
+            <button type="button" class="btn btn-danger" class="btn btn-danger"
+              (click)="deleteCourse(pointIndex)">Delete Course</button>
+          </div>
+          <button type="button" [disabled]="!myForm.valid" class="btn btn-primary" tooltip="Enter the Course Name"
+            (click)="addCourse()">Add Course</button>
+        </div><br>
+        <button type="button" [disabled]="!myForm.valid" class="btn btn-success" type="submit"
+          (click)="submit()">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- {{ this.myForm.value | json }} -->

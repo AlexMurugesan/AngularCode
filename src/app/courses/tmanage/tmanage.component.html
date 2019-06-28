@@ -1,0 +1,53 @@
+<!-- <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head> -->
+
+
+<div style=" height:100%; margin-top: 20px">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>Trainers' Details</h3>
+      <div style="overflow-y: scroll;height: 60%">
+        <table class="table table-bordered table-striped mb-0 table-fixed">
+          <tr style="background-color: black; color: white; text-transform: capitalize">
+            <th>Trainer ID</th>
+            <th>Trainer Name</th>
+            <th>Courses</th>
+          </tr>
+          <tr *ngFor="let t of trainers">
+            <td rowspan="t.courses.length()">{{t.trainerId}}</td>
+            <td rowspan="t.courses.length()">{{t.trainerName}}</td>
+            <td>
+              <table cellpadding="0" cellspacing="0">
+                <tr *ngFor="let c of t.courses">
+                  <td>{{c.course_name}}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="col-sm-6">
+      <h3>Add Trainer</h3><br>
+      Trainer Name:<br>
+      <input class="form-control" style="width: 50%; margin-left: 150px;" type="text" [(ngModel)]="trainerName" /><br><br>
+
+      Select Courses:<span>  </span>
+      <mat-form-field appearance="fill">
+        <mat-select class="mat-app-background" style="color: black" class="virtual-scroll" [multiple]="true"
+          [(ngModel)]="arr">
+          <mat-option *ngFor="let course of courses;index as i" [value]="i">{{course.course_name}}</mat-option>
+        </mat-select>
+      </mat-form-field><br>
+      <button style="margin-top: 90px; margin-right: 350px" class="btn btn-success" (click)="submit(arr,trainerName)">Submit</button>
+
+    </div>
+  </div>
+</div>

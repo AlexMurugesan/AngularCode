@@ -1,0 +1,60 @@
+<body style="height:100%">
+    <div class="container" >
+    <h3 style="margin-top: 30px; margin-left: 450px">Add Session</h3>
+    <form [formGroup]="TrainerAllocationForm" action="" class="form-horizontal">
+       <div class="row" style="margin-left: 10%">
+        <div class="col-sm-6">
+            <div class="form-group has-success">
+                <label>Course Name</label>
+                <div class="col-sm-6">
+                    <select class="form-control" formControlName="course_id" [(ngModel)]="cid" (change)='loadTrainers()'>
+                        <option *ngFor="let x of courses" [value]=x.course_id>{{x.course_name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group has-success">
+                <label>Start Time</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" formControlName="startTime" [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                       <owl-date-time #dt></owl-date-time>
+                    </div>
+            </div>
+            <div class="form-group has-success">
+                <label>Back-up Trainer</label>
+                <div class="col-sm-6">
+                    <select class="form-control" formControlName="backup_trainer_id">
+                        <option *ngFor="let b of trainersDummy" [value]=b.trainerId>{{b.trainerName}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group has-success">
+                <label>Trainer Name</label>
+                <div class="col-sm-6">
+                    <select class="form-control" formControlName="trainer_id" [(ngModel)]="tid" (change)='loadBackUp()'>
+                        <option *ngFor="let t of trainers" [value]=t.trainerId>{{t.trainerName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group has-success">
+                <label>End Time</label>
+                <div class="col-sm-6">
+                        <input class="form-control" formControlName="endTime" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                       <owl-date-time #dt1></owl-date-time>
+                    </div>
+                </div>
+            <div class="form-group has-success">
+                <label>Comments</label>
+                <div class="col-sm-6">
+                    <textarea formControlName="comment" class="md-textarea form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-danger" style="margin-left: 360px" [disabled]="!TrainerAllocationForm.valid" (click)='callSubmit()'>Submit</button>
+    </div>
+    </form>
+    </div>
+</body>
+
+<!-- {{this.TrainerAllocationForm.value | json}} -->
